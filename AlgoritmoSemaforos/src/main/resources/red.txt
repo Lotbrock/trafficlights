@@ -1,0 +1,11 @@
+5 10
+0 1 calle1 5
+0 3 calle2 6
+1 0 calle3 8 
+1 2 calle4 7
+2 0 calle5 4
+2 3 calle6 12
+2 4 calle7 7
+3 4 calle8 4
+4 1 calle9 10
+4 2 calle10 8
