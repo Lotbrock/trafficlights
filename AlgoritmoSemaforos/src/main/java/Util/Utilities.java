@@ -15,8 +15,8 @@ public class Utilities {
             File doc =
                     new File(path);
             Scanner obj = new Scanner(doc);
-            var VertexAndEdges = obj.nextLine().split(" ");
-            System.out.println("Vertex:"+ VertexAndEdges[0]+" Edges: "+VertexAndEdges[1]);
+            var vertexAndEdges = obj.nextLine().split(" ");
+            System.out.println("Vertex:"+ vertexAndEdges[0]+" Edges: "+vertexAndEdges[1]);
             while (obj.hasNextLine()) {
                 newEdge = obj.nextLine().split(" ");
                 edges.add(new Edge(
@@ -32,6 +32,32 @@ public class Utilities {
 
         }
         return edges;
+
+    }
+
+    public static ArrayList<Car> createCars(String path)
+    {
+        ArrayList<Car> cars = new ArrayList<>();
+        try {
+            String[] newCar = new String[3];
+            File doc =
+                    new File(path);
+            Scanner obj = new Scanner(doc);
+            var journeys = obj.nextLine().split(" ");
+            System.out.println("NumCars:"+ journeys[0]);
+            while (obj.hasNextLine()) {
+                newCar = obj.nextLine().split(" ");
+
+                cars.add(new Car(
+                        newCar,
+                        0,
+                        0
+                ));
+            }
+        } catch (Exception e) {
+
+        }
+        return cars;
 
     }
 }

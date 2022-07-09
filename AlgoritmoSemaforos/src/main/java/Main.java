@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-       var edges =  Utilities.createEdges("..\\resources\\red.txt");
-       edges.forEach(e -> System.out.println(e.toString()));
-
-
+       //var edges =  Utilities.createEdges("..\\resources\\red.txt");
+       //edges.forEach(e -> System.out.println(e.toString()));
+        var cars = Utilities.createCars("D:\\Trabajos\\Uni\\8vo\\Diplomado\\software\\trafficlights\\AlgoritmoSemaforos\\src\\main\\resources\\trayectos.txt");
+        cars.forEach(e -> System.out.println(e.toString()));
 //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
 //        fw.addEdge(0, 3, 7);
