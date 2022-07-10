@@ -1,9 +1,7 @@
 package Util;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
 
 public class Utilities {
 
@@ -39,20 +37,23 @@ public class Utilities {
     {
         ArrayList<Car> cars = new ArrayList<>();
         try {
-            String[] newCar = new String[3];
+            ArrayList<String> newCar = new ArrayList<>();
             File doc =
                     new File(path);
             Scanner obj = new Scanner(doc);
             var journeys = obj.nextLine().split(" ");
             System.out.println("NumCars:"+ journeys[0]);
             while (obj.hasNextLine()) {
-                newCar = obj.nextLine().split(" ");
-
+                newCar.addAll(List.of(obj.nextLine().split(" ")));
+                int numberOfEdges = Integer.parseInt(newCar.get(0));
+                newCar.remove(0);
                 cars.add(new Car(
-                        newCar,
+                        newCar.toArray(String[]::new),
                         0,
-                        0
+                        0,
+                        numberOfEdges
                 ));
+                newCar.clear();
             }
         } catch (Exception e) {
 
