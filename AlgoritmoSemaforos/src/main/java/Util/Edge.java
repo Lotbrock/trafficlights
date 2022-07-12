@@ -31,6 +31,54 @@ public class Edge {
                 '}';
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Car[] getCarsInEdge() {
+        return carsInEdge;
+    }
+
+    public void setCarsInEdge(Car[] carsInEdge) {
+        this.carsInEdge = carsInEdge;
+    }
+
+    public int getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(int origin) {
+        this.origin = origin;
+    }
+
+    public int getDestiny() {
+        return destiny;
+    }
+
+    public void setDestiny(int destiny) {
+        this.destiny = destiny;
+    }
+
+    public Integer getLigthTraficTime() {
+        return ligthTraficTime;
+    }
+
+    public void setLigthTraficTime(Integer ligthTraficTime) {
+        this.ligthTraficTime = ligthTraficTime;
+    }
+
+    public Integer getWeigth() {
+        return weigth;
+    }
+
+    public void setWeigth(Integer weigth) {
+        this.weigth = weigth;
+    }
+
     public void addCar()
     {
 

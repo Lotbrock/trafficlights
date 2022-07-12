@@ -1,17 +1,28 @@
-import Util.Edge;
-import Util.FloydWarshall;
-import Util.Utilities;
+import Util.*;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Scanner;
 
+import static Util.Utilities.programVertex;
+import static java.util.stream.Collectors.toMap;
+
 public class Main {
+
     public static void main(String[] args) {
 
-       //var edges =  Utilities.createEdges("..\\resources\\red.txt");
-       //edges.forEach(e -> System.out.println(e.toString()));
-        var cars = Utilities.createCars("D:\\Trabajos\\Uni\\8vo\\Diplomado\\software\\trafficlights\\AlgoritmoSemaforos\\src\\main\\resources\\trayectos.txt");
-        cars.forEach(e -> System.out.println(e.toString()));
+        Collection<Edge>  edges =  Utilities.createEdges("D:\\Trabajos\\Uni\\8vo\\Diplomado\\software\\trafficlights\\AlgoritmoSemaforos\\src\\main\\resources\\red.txt");
+       edges.forEach(e -> System.out.println(e.toString()));
+        Collection<Car> cars = Utilities.createCars("D:\\Trabajos\\Uni\\8vo\\Diplomado\\software\\trafficlights\\AlgoritmoSemaforos\\src\\main\\resources\\trayectos.txt");
+        System.out.println("===============CARS==========");
+       cars.forEach(e -> System.out.println(e.toString()));
+        System.out.println("===============Constants==========");
+        System.out.println("vertex: "+Constants.numOfVertex);
+        System.out.println("edges: "+Constants.numOfEdges);
+        System.out.println("cars: "+Constants.numOfCars);
+
+        programVertex(cars,edges);
+        var uniqueEdges =edges.stream().collect(toMap(Edge::getDestiny, p -> p, (p,q) -> p)).values();
 //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
 //        fw.addEdge(0, 3, 7);
