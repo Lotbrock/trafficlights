@@ -1,9 +1,12 @@
 package Util;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static Util.Constants.outputFilepath;
 import static Util.Constants.programVertexList;
 import static java.util.stream.Collectors.toMap;
 
@@ -100,6 +103,36 @@ public class Utilities {
             {
                 programVertexList.add(programVertex);
             }
+        }
+
+    }
+
+    public static void createOutputFile()
+    {
+        String newLine = "\r\n";
+        String outputFile = programVertexList.size() + newLine;
+
+        for (var vertex: programVertexList)
+        {
+            outputFile += vertex.id +newLine+ vertex.numberOfEdges +newLine;
+
+            for (var traficLight: vertex.programTraficLights)
+            {
+                outputFile += traficLight.streetName + " " + traficLight.greenSeconds + newLine;
+            }
+        }
+
+        try {
+            File file = new File(outputFilepath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(outputFile);
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Scanner;
 
+import static Util.Utilities.createOutputFile;
 import static Util.Utilities.programVertex;
 import static java.util.stream.Collectors.toMap;
 
@@ -23,7 +24,8 @@ public class Main {
 
         programVertex(cars,edges);
         var uniqueEdges =edges.stream().collect(toMap(Edge::getDestiny, p -> p, (p,q) -> p)).values();
-//        FloydWarshall fw = new FloydWarshall(5);
+        createOutputFile();
+        //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
 //        fw.addEdge(0, 3, 7);
 //        fw.addEdge(1, 3, 8);
