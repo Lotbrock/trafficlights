@@ -91,12 +91,10 @@ public class Utilities {
                 int initOfPath = 0;
                 for(var route : routes)
                 {
-                    for(String road: route) {
-                        if (road == edge.name)
+                        if (route[0].equals(edge.name))
                             initOfPath = 1;
-                    }
                 }
-                program.greenSeconds = 1+initOfPath;
+                program.greenSeconds = 1+ initOfPath;
                 programVertex.programTraficLights.add(program);
             }
             if(programVertex != null)
