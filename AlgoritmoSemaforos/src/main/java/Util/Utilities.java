@@ -139,7 +139,7 @@ public class Utilities {
         }
     }
 
-    public static int simulate(List<Car> cars)
+    public static int simulate(Iterable<Car> cars)
     {
         int score = 0;
         int currentTime = 0;

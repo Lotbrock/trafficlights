@@ -49,7 +49,7 @@ public class Vertex {
         int nexPos = 0;
         for (var trafficLight :programTraficLights
              ) {
-            Arrays.fill(greenLightsCycle, nexPos, trafficLight.getGreenSeconds(), trafficLight);
+            Arrays.fill(greenLightsCycle, nexPos, nexPos+trafficLight.getGreenSeconds(), trafficLight);
             nexPos += trafficLight.getGreenSeconds();
         }
 
