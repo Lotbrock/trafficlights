@@ -13,6 +13,6 @@ public class Constants {
 
     public static String outputFilepath = "D:\\_output.txt";
 
-    public static int bonusPerCar;
-    public static int simulationTime;
+    public static int bonusPerCar = 10;
+    public static int simulationTime = 60;
 }

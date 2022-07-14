@@ -1,13 +1,16 @@
 package model;
 
-public class CarPositionSimulation {
-    public Car Car;
-    public int StreetNumber;
-    public int TimeGotHere;
+import java.util.Comparator;
+
+public class CarPositionSimulation{
+    public Car car;
+    public int edgeNumber;
+    public int timeGotHere;
 
     public CarPositionSimulation(model.Car car, int timeGotHere) {
-        Car = car;
-        StreetNumber = 0;
-        TimeGotHere = timeGotHere;
+        this.car = car;
+        edgeNumber = 0;
+        this.timeGotHere = timeGotHere;
     }
+
 }

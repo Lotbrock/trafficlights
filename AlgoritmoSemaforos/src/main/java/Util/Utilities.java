@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static Util.Constants.*;
@@ -138,17 +137,48 @@ public class Utilities {
             e.printStackTrace();
         }
     }
+    public static void sortedArray(List<CarPositionSimulation> list, CarPositionSimulation car, Comparator<CarPositionSimulation> comparator)
+    {
+        if(list.size()== 0)
+        {
+            list.add(car);
+            return;
+        }
+        if(comparator.compare(list.get(list.size()-1),car) <= 0)
+        {
+            list.add(car);
+            return;
+        }
+        if (comparator.compare(list.get(0),car)>=0)
+        {
+            list.add(0,car);
+            return;
+        }
 
-    public static int simulate(Iterable<Car> cars)
+        int index = Collections.binarySearch(list,car, comparator);
+        if(index < 0)
+            index = ~index;
+        list.add(index,car);
+    }
+
+    public static int simulate(Iterable<Car> cars, Collection<Edge> edges)
     {
         int score = 0;
         int currentTime = 0;
         List<CarPositionSimulation> carsPositionSimulation = new ArrayList<>();
+
         int simulationCarIndexStart = -(numOfCars);
         //init car positions in simulation 
         for (Car car: cars
              ) {
-            carsPositionSimulation.add(new CarPositionSimulation(car, simulationCarIndexStart));
+
+            if (car.numberOfEdges == 1)
+            {
+                score += bonusPerCar + simulationTime;
+            }
+            else {
+                carsPositionSimulation.add(new CarPositionSimulation(car, simulationCarIndexStart));
+            }
             simulationCarIndexStart++;
         }
 
@@ -162,8 +192,70 @@ public class Utilities {
 
         while(currentTime <= simulationTime){
 
-        }
+            for (int i = 0; i < carsPositionSimulation.size();i++)
+            {
+                var carSimulate = carsPositionSimulation.get(i);
+                if(carSimulate.timeGotHere >= currentTime)
+                    continue;
 
+                var edgeName = carSimulate.car.route[carSimulate.edgeNumber];
+                Edge edge = edges.stream().filter(e -> e.name.equals(edgeName)).findFirst().get();
+
+                var vertex = programVertexList.stream().filter(e->e.getId() == edge.destiny).findFirst().get();
+                if(vertex.lastCycle >= currentTime)
+                    continue;
+
+                //if is the first trafficLight continue to the next
+                if (vertex.greenLightsCycle.length == 0)
+                    continue;
+
+
+                var currentTrafficLight = vertex.greenLightsCycle[currentTime % vertex.greenLightsCycle.length];
+
+                //if the trafficLigth is not green, move to the next car
+                if (!edge.name.equals(currentTrafficLight.streetName))
+                    continue;
+
+
+                vertex.lastCycle = currentTime;
+
+                //move the car to the next edge
+                carSimulate.edgeNumber++;
+                var newEdgeName = carSimulate.car.route[carSimulate.edgeNumber];
+                Edge newEdge = edges.stream().filter(e -> e.name.equals(newEdgeName)).findFirst().get();
+
+                //add way time of car
+                carSimulate.timeGotHere = currentTime + newEdge.weigth;
+
+                carsPositionSimulation.remove(i);
+                i--;
+                    //validate if car finished
+                    if(carSimulate.edgeNumber == carSimulate.car.route.length-1)
+                    {
+                        if(carSimulate.timeGotHere <= simulationTime){
+                            score += bonusPerCar +(simulationTime-carSimulate.timeGotHere);
+                        }
+
+                    }else {
+
+                        //TO DO==== Do sort algorithm to change the car position to the right one position
+                     /*   carsPositionSimulation.sort(new Comparator<CarPositionSimulation>() {
+                            @Override
+                            public int compare(CarPositionSimulation o1, CarPositionSimulation o2) {
+                                if (o1.timeGotHere > o2.timeGotHere) {
+                                    return 1;
+                                } else if (o1.timeGotHere < o2.timeGotHere) {
+                                    return -1;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        });*/
+                    }
+            }
+            currentTime++;
+        }
+        System.out.println(score);
         return score;
     }
 

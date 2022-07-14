@@ -23,7 +23,7 @@ public class Main {
 
         programVertex(cars,edges);
         var uniqueEdges =edges.stream().collect(toMap(Edge::getDestiny, p -> p, (p,q) -> p)).values();
-        simulate(cars);
+        simulate(cars, edges);
         createOutputFile();
         //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
