@@ -1,15 +1,15 @@
-package Util;
+package model;
 
 import java.time.DateTimeException;
 import java.util.Arrays;
 import java.util.Date;
 
 public class Car {
-    String[] route;
-    double initTime;
-    double endTime;
-    int numberOfEdges;
-    boolean endRoute = false;
+    public String[] route;
+    public double initTime;
+    public double endTime;
+    public int numberOfEdges;
+    public boolean endRoute = false;
 
     public Car(String[] route, double initTime, double endTime, int numberOfEdges) {
         this.route = route;

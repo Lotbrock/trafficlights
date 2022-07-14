@@ -1,17 +1,17 @@
-package Util;
+package model;
+
+import Util.ProgramTraficLight;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
 
-    int id;
-    int numberOfEdges;
-    List<ProgramTraficLight> programTraficLights = new ArrayList<ProgramTraficLight>();
-    public static void insertCar(Car car)
-    {
+    public int id;
+    public int numberOfEdges;
+    public List<ProgramTraficLight> programTraficLights = new ArrayList<ProgramTraficLight>();
 
-    }
+    public int currentGreenLight;
 
     public int getId() {
         return id;

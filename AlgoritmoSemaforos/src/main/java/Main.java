@@ -1,8 +1,8 @@
 import Util.*;
+import model.Car;
+import model.Edge;
 
-import java.io.File;
 import java.util.Collection;
-import java.util.Scanner;
 
 import static Util.Utilities.createOutputFile;
 import static Util.Utilities.programVertex;

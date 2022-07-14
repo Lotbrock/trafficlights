@@ -1,5 +1,7 @@
 package Util;
 
+import model.Vertex;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,5 +13,5 @@ public class Constants {
 
     public static String outputFilepath = "D:\\_output.txt";
 
-
+    public static int bonusPerCar;
 }

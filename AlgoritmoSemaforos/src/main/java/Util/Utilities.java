@@ -1,13 +1,17 @@
 package Util;
 
+import model.Car;
+import model.CarPositionSimulation;
+import model.Edge;
+import model.Vertex;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static Util.Constants.outputFilepath;
-import static Util.Constants.programVertexList;
+import static Util.Constants.*;
 import static java.util.stream.Collectors.toMap;
 
 public class Utilities {
@@ -133,4 +137,24 @@ public class Utilities {
             e.printStackTrace();
         }
     }
+
+    public static int simulate(List<Car> cars)
+    {
+        int score = 0;
+        int currentTime = 0;
+        List<CarPositionSimulation> carsPositionSimulation = new ArrayList<>();
+        int simulationCarIndexStart = -(numOfCars);
+        //init car positions in simulation 
+        for (Car car: cars
+             ) {
+            carsPositionSimulation.add(new CarPositionSimulation(car, simulationCarIndexStart));
+            simulationCarIndexStart++;
+        }
+        
+
+
+        return score;
+    }
+
+
 }

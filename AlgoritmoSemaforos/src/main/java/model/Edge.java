@@ -1,14 +1,14 @@
-package Util;
+package model;
 
 import java.util.Arrays;
 
 public class Edge {
-    String name;
-    Car[] carsInEdge;
-    int origin;
-    int destiny;
-    Integer ligthTraficTime;
-    Integer weigth;
+    public String name;
+    public Car[] carsInEdge;
+    public int origin;
+    public  int destiny;
+    public Integer ligthTraficTime;
+    public Integer weigth;
 
     public Edge(String name, Car[] carsInEdge, int origin, int destiny, Integer ligthTraficTime, Integer weigth) {
         this.name = name;
