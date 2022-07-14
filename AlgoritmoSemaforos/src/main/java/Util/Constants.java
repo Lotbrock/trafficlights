@@ -14,4 +14,5 @@ public class Constants {
     public static String outputFilepath = "D:\\_output.txt";
 
     public static int bonusPerCar;
+    public static int simulationTime;
 }

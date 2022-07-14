@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static Util.Constants.*;
@@ -150,8 +151,18 @@ public class Utilities {
             carsPositionSimulation.add(new CarPositionSimulation(car, simulationCarIndexStart));
             simulationCarIndexStart++;
         }
-        
 
+        //Init trafficLights
+        for (var promagramVertex: programVertexList
+             ) {
+           promagramVertex.initTrafficLightCycle();
+           promagramVertex.lastCycle = -1;
+
+        }
+
+        while(currentTime <= simulationTime){
+
+        }
 
         return score;
     }
