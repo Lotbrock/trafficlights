@@ -74,8 +74,9 @@ public class Utilities {
 
     }
 
-    public static void programVertex(Collection<Car> cars, Collection<Edge>  edges)
+    public static Collection<Vertex> programVertex(Collection<Car> cars, Collection<Edge>  edges)
     {
+        Collection<Vertex> programVertexList = new ArrayList<>();
         List<String[]> routes = new ArrayList<>();
         cars.forEach(e-> routes.add(e.route));
         for( int i = 0 ; i < Constants.numOfVertex; i++)
@@ -106,15 +107,15 @@ public class Utilities {
                 programVertexList.add(programVertex);
             }
         }
-
+        return programVertexList;
     }
 
     public static void createOutputFile()
     {
         String newLine = "\r\n";
-        String outputFile = programVertexList.size() + newLine;
+        String outputFile = programVertexListFinal.size() + newLine;
 
-        for (var vertex: programVertexList)
+        for (var vertex: programVertexListFinal)
         {
             outputFile += vertex.id +newLine+ vertex.numberOfEdges +newLine;
 

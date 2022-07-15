@@ -23,10 +23,10 @@ public class Main {
         System.out.println("edges: "+Constants.numOfEdges);
         System.out.println("cars: "+Constants.numOfCars);
 
-        programVertex(cars,edges);
+        var solution = programVertex(cars,edges);
         var uniqueEdges =edges.stream().collect(toMap(Edge::getDestiny, p -> p, (p,q) -> p)).values();
-        optimizeHillClimbing(cars,edges);
-        simulate(cars, edges);
+        optimizeHillClimbing(cars,edges, solution);
+        simulate(cars, edges,solution);
         createOutputFile();
         //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
