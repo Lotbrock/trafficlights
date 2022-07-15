@@ -4,6 +4,8 @@ import model.Edge;
 
 import java.util.Collection;
 
+import static Util.Program.optimizeHillClimbing;
+import static Util.Program.simulate;
 import static Util.Utilities.*;
 import static java.util.stream.Collectors.toMap;
 
@@ -23,6 +25,7 @@ public class Main {
 
         programVertex(cars,edges);
         var uniqueEdges =edges.stream().collect(toMap(Edge::getDestiny, p -> p, (p,q) -> p)).values();
+        optimizeHillClimbing(cars,edges);
         simulate(cars, edges);
         createOutputFile();
         //        FloydWarshall fw = new FloydWarshall(5);
