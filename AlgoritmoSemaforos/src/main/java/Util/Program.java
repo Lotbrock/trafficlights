@@ -5,10 +5,7 @@ import model.CarPositionSimulation;
 import model.Edge;
 import model.Vertex;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static Util.Constants.*;
 import static Util.Constants.simulationTime;
@@ -17,21 +14,36 @@ import static Util.Utilities.sortedArray;
 public class Program {
     public static void optimizeHillClimbing(Iterable<Car> cars, Collection<Edge> edges){
         int lastScore = simulate(cars,edges);
+        System.out.println("first Score " +lastScore);
         var maxTrafficLights = programVertexList.stream().max(Comparator.comparing(e -> e.programTraficLights.size())).orElseThrow().programTraficLights.size();
 
         while (true)
         {
-
+            System.out.println("again");
+            //try to find a new best solution changing the traffic lights order
+            optimizeByChangingTrafficLightOrder(cars,edges,maxTrafficLights);
+            System.out.println("new Score: ");
         }
     }
-    public static void optimizeByChangingTrafficLightOrder(Iterable<Car> cars, Collection<Edge> edges)
+    public static void optimizeByChangingTrafficLightOrder(Iterable<Car> cars, Collection<Edge> edges, int maxPos)
     {
-        int bestSolution = simulate(cars, edges);
-        for (int j= 1; j < programVertexList.size(); j++)
-        {
-            for (int i = 0; i<j;i++ )
-            {
-                
+        int actualBestScore = simulate(cars, edges);
+        for (int j= 0; j < programVertexList.size(); j++) {
+            int loops = Math.min(maxPos, programVertexList.toArray(Vertex[]::new)[j].programTraficLights.size());
+            for (int pos2 = 1; pos2 < loops; pos2++) {
+                for (int pos1 = 0; pos1 < pos2; pos1++) {
+                    var oldProgramVertexList = programVertexList;
+                    Collections.swap(programVertexList.toArray(Vertex[]::new)[j].programTraficLights,pos1,pos2);
+                    int newScore = simulate(cars, edges);
+                    if (newScore < actualBestScore)
+                    {
+                        programVertexList = oldProgramVertexList;
+                    }
+                    else {
+                        actualBestScore = newScore;
+                    }
+
+                }
             }
         }
     }
@@ -130,7 +142,7 @@ public class Program {
             }
             currentTime++;
         }
-        System.out.println(score);
+        //System.out.println(score);
         return score;
     }
 }
