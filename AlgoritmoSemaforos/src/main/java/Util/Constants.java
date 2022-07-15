@@ -12,7 +12,9 @@ public class Constants {
     public static Collection<Vertex> programVertexListFinal = new ArrayList<>();
 
     public static String outputFilepath = "D:\\_output.txt";
+    public static int loops= 0;
+    public static int toleranceLoops = 6000;
+    public static int bonusPerCar = 500;
+    public static int simulationTime = 676;
 
-    public static int bonusPerCar = 10;
-    public static int simulationTime = 60;
 }

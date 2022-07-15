@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Vertex {
+public class Vertex implements Cloneable {
 
     public int id;
     public int numberOfEdges;

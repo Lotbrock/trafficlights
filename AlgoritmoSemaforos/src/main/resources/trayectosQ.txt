@@ -1,0 +1,16 @@
+15
+4 calle1 calle4 calle6 calle8
+3 calle5 calle2 calle8
+4 calle5 calle2 calle8 calle9
+2 calle4 calle7
+2 calle10 calle6
+4 calle2 calle8 calle9 calle4
+3 calle2 calle8 calle9
+3 calle8 calle9 calle4
+4 calle5 calle2 calle8 calle9
+1 calle5
+1 calle2
+1 calle1
+1 calle10
+1 calle4
+1 calle7
