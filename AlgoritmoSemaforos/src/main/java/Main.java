@@ -5,7 +5,7 @@ import model.Edge;
 
 import java.util.Collection;
 
-import static Util.Program.optimizeHillClimbing;
+import static Util.Program.optimize;
 import static Util.Program.simulate;
 import static Util.Utilities.*;
 
@@ -29,7 +29,7 @@ public class Main {
         var solution = programVertex(cars,edges);
         System.out.println("Initial Score: "+simulate(cars, edges,solution));
 
-        optimizeHillClimbing(cars,edges, solution);
+        optimize(cars,edges, solution);
         System.out.println("Last Score: "+simulate(cars, edges, solution));
         createOutputFile();
         

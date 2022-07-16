@@ -13,7 +13,7 @@ import static Util.Utilities.sortedArray;
 public class Program {
 
 
-    public static void optimizeHillClimbing(Iterable<Car> cars, Collection<Edge> edges, Collection<Vertex> programVertexList) {
+    public static void optimize(Iterable<Car> cars, Collection<Edge> edges, Collection<Vertex> programVertexList) {
         int lastScore = simulate(cars, edges, programVertexList);
         Collection<Vertex> newProgramList = programVertexList;
         System.out.println("first Score " + lastScore);
@@ -23,7 +23,7 @@ public class Program {
             System.out.println("again");
             //try to find a new best solution changing the traffic lights order
             newProgramList = optimizeByChangingTrafficLightOrder(cars, edges, maxTrafficLights, newProgramList.toArray(Vertex[]::new));
-            //System.out.println("aqui debe llegar el max "+simulate(cars,edges,programVertexListFinal));
+
             //Change the greenLight time for every traffic light, it can plus or less the value delta to green light time
             for (int delta = 1; delta <= 3; delta++) {
                 newProgramList = optimizeByChangingTrafficLightGreenSeconds(cars, edges, maxTrafficLights, newProgramList.toArray(Vertex[]::new), delta);
@@ -61,7 +61,7 @@ public class Program {
                 if ((newScore > actualBestScore) || ((newScore == actualBestScore) && (delta < 0))) {
                     programVertexList = newProgramVertexList;
                     actualBestScore = newScore;
-//                    System.out.println("partialNewScore with change in green light "+ newScore);
+                    System.out.println("partialNewScore with change in green light "+ newScore);
                 }
             }
         }
