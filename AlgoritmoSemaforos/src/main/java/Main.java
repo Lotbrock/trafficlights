@@ -1,5 +1,4 @@
 import Util.*;
-import static Util.Constants.programVertexListFinal;
 import static Util.Constants.ruta;
 import model.Car;
 import model.Edge;
@@ -9,16 +8,15 @@ import java.util.Collection;
 import static Util.Program.optimizeHillClimbing;
 import static Util.Program.simulate;
 import static Util.Utilities.*;
-import static java.util.stream.Collectors.toMap;
 
 public class Main {
 
     public static void main(String[] args) {
         
-        Collection<Edge>  edges =  Utilities.createEdges(ruta + "red_11.txt");
+        Collection<Edge>  edges =  Utilities.createEdges(ruta + "red_12.txt");
        edges.forEach(e -> System.out.println(e.toString()));
-        Collection<Car> cars = Utilities.createCars(ruta + "trayectos_11.txt");        
-        Utilities.simulationStandar(ruta + "simulacion_11.txt");
+        Collection<Car> cars = Utilities.createCars(ruta + "trayectos_12.txt");        
+        Utilities.simulationStandar(ruta + "simulacion_12.txt");
         System.out.println("===============CARS==========");
        cars.forEach(e -> System.out.println(e.toString()));
         System.out.println("===============Constants==========");
