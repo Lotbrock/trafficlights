@@ -10,11 +10,13 @@ public class Constants {
     public static int numOfVertex = 0;
     public static int numOfCars = 0;
     public static Collection<Vertex> programVertexListFinal = new ArrayList<>();
-
-    public static String outputFilepath = "D:\\_output.txt";
+    
+    public static String ruta = "C:\\Users\\John\\Downloads\\testdata\\";
+    public static String outputFilepath = ruta+"_output.txt";
     public static int loops= 0;
     public static int toleranceLoops = 6000;
-    public static int bonusPerCar = 500;
-    public static int simulationTime = 676;
+    public static int bonusPerCar = 0;
+    public static int simulationTime = 0;
+    public static int finalScore = 0;
 
 }

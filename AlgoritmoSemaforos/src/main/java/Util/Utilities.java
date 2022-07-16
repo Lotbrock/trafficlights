@@ -44,6 +44,17 @@ public class Utilities {
         return edges;
 
     }
+    
+    public static void simulationStandar(String path) {
+        try {
+            File doc = new File(path);
+            Scanner obj = new Scanner(doc);
+            simulationTime = Integer.parseInt(obj.nextLine().split(" ")[0]);
+            bonusPerCar = Integer.parseInt(obj.nextLine().split(" ")[0]);
+        } catch (Exception e) {
+
+        }
+    }
 
     public static ArrayList<Car> createCars(String path)
     {
