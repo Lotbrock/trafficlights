@@ -16,5 +16,6 @@ public class Constants {
     public static int toleranceLoops = 6000;
     public static int bonusPerCar = 500;
     public static int simulationTime = 676;
+    public static int bestScore = 0;
 
 }

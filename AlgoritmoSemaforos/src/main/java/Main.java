@@ -4,6 +4,7 @@ import model.Edge;
 
 import java.util.Collection;
 
+import static Util.Constants.bestScore;
 import static Util.Program.optimizeHillClimbing;
 import static Util.Program.simulate;
 import static Util.Utilities.*;
@@ -24,10 +25,10 @@ public class Main {
         System.out.println("cars: "+Constants.numOfCars);
 
         var solution = programVertex(cars,edges);
-        System.out.println("Initial Score: "+simulate(cars, edges,solution));
-
+        bestScore = simulate(cars, edges,solution);
+        System.out.println("Initial Score: "+ bestScore);
         optimizeHillClimbing(cars,edges, solution);
-        System.out.println("last score"+simulate(cars, edges,solution));
+        System.out.println("last score"+bestScore);
         createOutputFile();
         //        FloydWarshall fw = new FloydWarshall(5);
 //        fw.addEdge(0, 1, 6);
