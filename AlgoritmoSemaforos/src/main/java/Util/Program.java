@@ -12,8 +12,8 @@ import static Util.Utilities.sortedArray;
 
 public class Program {
     public static void optimizeHillClimbing(Iterable<Car> cars, Collection<Edge> edges, Collection<Vertex> programVertexList){
-        int initScore = bestScore;
-        System.out.println("first Score " +bestScore);
+        int lastScore = simulate(cars,edges,programVertexList);
+        System.out.println("first Score " +lastScore);
         var maxTrafficLights = programVertexList.stream().max(Comparator.comparing(e -> e.programTraficLights.size())).orElseThrow().programTraficLights.size();
 
         while (true)
@@ -28,17 +28,24 @@ public class Program {
                 programVertexList = optimizeByChangingTrafficLightGreenSeconds(cars,edges,maxTrafficLights,programVertexList.toArray(Vertex[]::new), delta);
                 programVertexList = optimizeByChangingTrafficLightGreenSeconds(cars,edges,maxTrafficLights,programVertexList.toArray(Vertex[]::new), -delta);
             }
+
+            int score = simulate(cars,edges,programVertexList);
             loops++;
-            System.out.println("loop: "+loops+ " score: "+ bestScore);
-            if (bestScore <= initScore )
+            System.out.println("loop: "+loops+ " score: "+ score);
+            if (lastScore <= score )
                 break;
             if (loops > toleranceLoops)
                 break;
+            else
+            {
+                lastScore = score;
+            }
         }
         programVertexListFinal = programVertexList;
     }
 
     public static Collection<Vertex> optimizeByChangingTrafficLightGreenSeconds(Iterable<Car> cars, Collection<Edge> edges, int maxPos, Vertex[] programVertexList, int delta){
+        int actualBestScore = simulate(cars, edges, Arrays.asList(programVertexList));
 
         for (int i =0; i< programVertexList.length;i++)
         {
@@ -50,10 +57,10 @@ public class Program {
                 if(newProgramVertexList[i].programTraficLights.toArray(ProgramTraficLight[]::new)[pos].greenSeconds <0)
                     continue;
                 int newScore = simulate(cars,edges,Arrays.asList(newProgramVertexList));
-                if((newScore > bestScore)|| ((newScore == bestScore)&& (delta < 0)))
+                if((newScore > actualBestScore)|| ((newScore == actualBestScore)&& (delta < 0)))
                 {
                     programVertexList = newProgramVertexList;
-                    bestScore = newScore;
+                    actualBestScore = newScore;
                     System.out.println("partialNewScore with change in green light "+ newScore);
                 }
             }
@@ -62,7 +69,7 @@ public class Program {
     }
     public static Collection<Vertex> optimizeByChangingTrafficLightOrder(Iterable<Car> cars, Collection<Edge> edges, int maxPos, Vertex[] programVertexList)
     {
-
+        int actualBestScore = simulate(cars, edges, Arrays.asList(programVertexList));
         int maxLoopsWithoutNewScore= 0;
         for (int j= 0; j < programVertexList.length; j++) {
             int loops = Math.min(maxPos, programVertexList[j].programTraficLights.size());
@@ -74,12 +81,12 @@ public class Program {
                     Collections.swap(a,pos1,pos2);
                     oldProgramVertexList[j].programTraficLights = a;
                     int newScore = simulate(cars, edges,Arrays.asList(oldProgramVertexList));
-                    if (newScore > bestScore)
+                    if (newScore > actualBestScore)
                     {
                         System.out.println("partialNewScore "+ newScore);
                         programVertexList = oldProgramVertexList;
                         programVertexListFinal = Arrays.asList(oldProgramVertexList);
-                        bestScore = newScore;
+                        actualBestScore = newScore;
                         maxLoopsWithoutNewScore = 0;
                     }else {
                         maxLoopsWithoutNewScore++;
@@ -89,7 +96,7 @@ public class Program {
                 }
             }
         }
-        System.out.println("new Score with swap: "+ bestScore);
+        System.out.println("new Score with swap: "+ actualBestScore);
         return Arrays.asList(programVertexList);
     }
     public static int simulate(Iterable<Car> cars, Collection<Edge> edges, Collection<Vertex> programVertexList)
